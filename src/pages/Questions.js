@@ -16,6 +16,7 @@ const Questions = () => {
   const [isDisabled, setIsDisabled] = useState(false);
   const [revealAnswer, setRevealAnswer] = useState(false);
   const [answer, setAnswer] = useState("");
+  const [selected, setSelected] = useState(false);
 
   // generates choices | place correctAns to random pos
   useEffect(() => {
@@ -24,6 +25,7 @@ const Questions = () => {
       const rand = Math.floor(Math.random() * (incorrectAnswers.length + 1));
       let newChoices = [...incorrectAnswers];
       newChoices.splice(rand, 0, correctAnswer);
+
       setRevealAnswer(false);
       setChoices(newChoices);
       setIsDisabled(false);
@@ -43,10 +45,8 @@ const Questions = () => {
   }, [answer, page, questions, setScore]);
 
   const handleAnswer = (answer, e) => {
-    e.target.style.backgroundColor = "orange";
-    e.target.style.color = "#fff";
+    setSelected(true);
     setIsDisabled(true);
-
     setAnswer(answer);
   };
 
@@ -59,6 +59,7 @@ const Questions = () => {
       setIsDisabled(true);
       setTimeout(() => {
         setPage(page + 1);
+        setSelected(false);
       }, 2000);
     }, interval * 1000);
 
@@ -86,8 +87,14 @@ const Questions = () => {
                 key={index}
                 choice={choice}
                 handleAnswer={handleAnswer}
+                isSelected={choice === answer && selected}
                 isCorrect={
                   choice === questions[page].correctAnswer && revealAnswer
+                }
+                isIncorrect={
+                  choice === answer &&
+                  revealAnswer &&
+                  choice !== questions[page].correctAnswer
                 }
               />
             );

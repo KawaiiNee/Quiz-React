@@ -1,6 +1,5 @@
 .choice {
   transition: all 0.15s ease-in-out;
-  /* border: 1px solid #ccc; */
   letter-spacing: 0.075rem;
 
   -moz-user-select: -moz-none;
@@ -9,6 +8,8 @@
 
   -ms-user-select: none;
   user-select: none;
+  color: white;
+  background-color: #112;
 }
 
 .enable .choice:hover {
@@ -16,10 +17,15 @@
   color: #112 !important;
 }
 
-.incorrect {
+.selected {
   transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
-  color: white;
-  background-color: #112;
+  color: white !important;
+  background-color: orange !important;
+}
+
+.selected.incorrect {
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+  background-color: red !important;
 }
 
 .correct {

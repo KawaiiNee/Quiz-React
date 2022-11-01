@@ -8,7 +8,6 @@ export const useGetQuestions = (url, query) => {
 
   if (query) {
     api_url = `${api_url}?${query}`;
-    console.log(api_url);
   }
 
   const fetchData = useCallback(async () => {

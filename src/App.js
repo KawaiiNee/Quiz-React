@@ -7,7 +7,6 @@ import Questions from "./pages/Questions";
 import Error from "./pages/Error";
 // import components
 import Navbar from "./components/Navbar";
-
 const App = () => {
   return (
     <Router>

@@ -40,7 +40,7 @@ const Home = () => {
           <div className="col-md-6 col-12">
             <div className="p-3">
               <label htmlFor="select-region" className="form-label">
-                Question Region
+                Region
               </label>
               <Region />
             </div>
