@@ -74,7 +74,7 @@ export const Category = () => {
       name="categories"
       className="form-select"
       onChange={handleChange}
-      value={params.category}
+      value={params.categories}
     >
       <option value="">Select a category</option>
       {categories.map((category) => {

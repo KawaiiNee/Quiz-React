@@ -7,8 +7,9 @@ const AppProvider = ({ children }) => {
     limit: 5,
     region: "",
     difficulty: "",
-    category: "",
+    categories: "",
   });
+
   const rounds = params.limit;
   const [interval, setInterval] = useState(7.5);
 
