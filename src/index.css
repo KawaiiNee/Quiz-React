@@ -1,0 +1,33 @@
+.choice {
+  transition: all 0.15s ease-in-out;
+  /* border: 1px solid #ccc; */
+  letter-spacing: 0.075rem;
+
+  -moz-user-select: -moz-none;
+  -khtml-user-select: none;
+  -webkit-user-select: none;
+
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.enable .choice:hover {
+  background: orange !important;
+  color: #112 !important;
+}
+
+.incorrect {
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+  color: white;
+  background-color: #112;
+}
+
+.correct {
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out;
+  color: white !important;
+  background-color: green !important;
+}
+
+.disabled > * {
+  pointer-events: none;
+}
