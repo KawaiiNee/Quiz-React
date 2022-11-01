@@ -1,25 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useGlobalContext } from "../context";
-import { Limit, Region, Difficulty, Category } from "../components/Input";
+import {
+  Limit,
+  Region,
+  Difficulty,
+  Category,
+  Interval,
+} from "../components/Input";
 
 const Home = () => {
-  const { setQuery, handleChange, params } = useGlobalContext();
-
-  const handleQuery = () => {
-    const param = Object.entries(params)
-      .map(([key, val]) => {
-        if (val) return `${key}=${val}`;
-        return null;
-      })
-      .filter((e) => {
-        if (e) return e;
-        return null;
-      })
-      .join("&");
-
-    setQuery(param);
-  };
+  const { params, handleQuery } = useGlobalContext();
 
   return (
     <main className="d-flex flex-column justify-content-center">
@@ -34,7 +25,7 @@ const Home = () => {
       <hr className="border border-secondary border-1 opacity-25 w-75 mx-auto"></hr>
 
       <form className="container w-75" onSubmit={(e) => e.preventDefault()}>
-        <div className="row gx-5 gy-4 ">
+        <div className="row gx-5 gy-4 justify-content-center">
           {/* limit */}
           <div className="col-md-6 col-12">
             <div className="p-3">
@@ -73,6 +64,7 @@ const Home = () => {
               <Category />
             </div>
           </div>
+          <Interval />
         </div>
       </form>
     </main>

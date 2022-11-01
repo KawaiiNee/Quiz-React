@@ -8,7 +8,7 @@ import { useGetQuestions } from "../fetchData";
 const API_URL = "https://the-trivia-api.com/api/questions";
 
 const Questions = () => {
-  const { rounds, query } = useGlobalContext();
+  const { rounds, query, interval } = useGlobalContext();
   const { loading, questions, initScore } = useGetQuestions(API_URL, query);
   const [score, setScore] = useState(initScore);
   const [page, setPage] = useState(0);
@@ -45,12 +45,12 @@ const Questions = () => {
   const handleAnswer = (answer, e) => {
     e.target.style.backgroundColor = "orange";
     e.target.style.color = "#fff";
-    e.target.classList.add("ASDFADSFKLASDFJKLASDF");
     setIsDisabled(true);
 
     setAnswer(answer);
   };
 
+  // TODO: an option weather timed or not
   // setup delays | before revealAnswer | preview correctAnswer | setPage
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -59,13 +59,13 @@ const Questions = () => {
       setIsDisabled(true);
       setTimeout(() => {
         setPage(page + 1);
-      }, 1750);
-    }, 1750);
+      }, 2000);
+    }, interval * 1000);
 
     return () => {
       clearTimeout(timeout);
     };
-  }, [page, evalAnswer]);
+  }, [page, evalAnswer, interval]);
 
   if (loading) {
     return <Spinner />;

@@ -10,12 +10,28 @@ const AppProvider = ({ children }) => {
     category: "",
   });
   const rounds = params.limit;
+  const [interval, setInterval] = useState(7.5);
 
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
 
     setParams({ ...params, [name]: value });
+  };
+
+  const handleQuery = () => {
+    const param = Object.entries(params)
+      .map(([key, val]) => {
+        if (val) return `${key}=${val}`;
+        return null;
+      })
+      .filter((e) => {
+        if (e) return e;
+        return null;
+      })
+      .join("&");
+
+    setQuery(param);
   };
 
   return (
@@ -27,6 +43,9 @@ const AppProvider = ({ children }) => {
         setParams,
         rounds,
         handleChange,
+        interval,
+        setInterval,
+        handleQuery,
       }}
     >
       {children}

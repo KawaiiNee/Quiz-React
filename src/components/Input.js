@@ -91,3 +91,27 @@ export const Category = () => {
     </select>
   );
 };
+
+export const Interval = () => {
+  const { interval, setInterval } = useGlobalContext();
+  return (
+    <div className="col-md-6 col-12">
+      <div className="p-3">
+        <label htmlFor="questions-interval" className="form-label">
+          Question's Interval {interval}
+          <small className="text-muted ms-1">( no. of seconds )</small>
+        </label>
+        <input
+          className="form-range"
+          type="range"
+          id="questions-interval"
+          step={0.5}
+          min={2.5}
+          max={20}
+          value={interval}
+          onChange={(e) => setInterval(e.target.value)}
+        />
+      </div>
+    </div>
+  );
+};
