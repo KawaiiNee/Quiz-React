@@ -12,6 +12,7 @@ const AppProvider = ({ children }) => {
 
   const rounds = params.limit;
   const [interval, setInterval] = useState(7.5);
+  const [isTimed, setIsTimed] = useState(false);
 
   const handleChange = (e) => {
     const name = e.target.name;
@@ -47,6 +48,8 @@ const AppProvider = ({ children }) => {
         interval,
         setInterval,
         handleQuery,
+        isTimed,
+        setIsTimed,
       }}
     >
       {children}

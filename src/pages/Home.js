@@ -7,10 +7,11 @@ import {
   Difficulty,
   Category,
   Interval,
+  Timed,
 } from "../components/Input";
 
 const Home = () => {
-  const { handleQuery } = useGlobalContext();
+  const { handleQuery, isTimed } = useGlobalContext();
 
   return (
     <main className="d-flex flex-column justify-content-center">
@@ -30,7 +31,8 @@ const Home = () => {
           <Region />
           <Difficulty />
           <Category />
-          <Interval />
+          {isTimed && <Interval />}
+          <Timed />
         </div>
       </form>
     </main>

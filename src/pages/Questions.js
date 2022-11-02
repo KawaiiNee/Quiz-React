@@ -9,7 +9,7 @@ import Timer from "../components/Timer";
 const API_URL = "https://the-trivia-api.com/api/questions";
 
 const Questions = () => {
-  const { rounds, query, interval } = useGlobalContext();
+  const { rounds, query, interval, isTimed } = useGlobalContext();
   const { loading, questions, initScore } = useGetQuestions(API_URL, query);
   const [score, setScore] = useState(initScore);
   const [page, setPage] = useState(0);
@@ -49,26 +49,38 @@ const Questions = () => {
     setSelected(true);
     setIsDisabled(true);
     setAnswer(answer);
+    if (!isTimed) {
+      setTimeout(() => {
+        setRevealAnswer(true);
+        evalAnswer();
+        setTimeout(() => {
+          setSelected(false);
+          setPage(page + 1);
+        }, answerCD / 1.25);
+      }, answerCD);
+    }
   };
 
   // TODO: an option weather timed or not
   // TODO: make the question adjust
   // setup delays | before revealAnswer | preview correctAnswer | setPage
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setRevealAnswer(true);
-      evalAnswer();
-      setIsDisabled(true);
-      setTimeout(() => {
-        setPage(page + 1);
-        setSelected(false);
-      }, answerCD);
-    }, timer * 1000);
+    if (isTimed) {
+      const timeout = setTimeout(() => {
+        setRevealAnswer(true);
+        evalAnswer();
+        setIsDisabled(true);
+        setTimeout(() => {
+          setPage(page + 1);
+          setSelected(false);
+        }, answerCD);
+      }, timer * 1000);
 
-    return () => {
-      clearTimeout(timeout);
-    };
-  }, [page, evalAnswer, interval, timer]);
+      return () => {
+        clearTimeout(timeout);
+      };
+    }
+  }, [page, evalAnswer, interval, timer, isTimed]);
 
   if (loading) {
     return <Spinner />;
@@ -102,14 +114,16 @@ const Questions = () => {
             );
           })}
         </div>
-        <Timer
-          interval={interval}
-          revealAnswer={revealAnswer}
-          timer={timer}
-          setTimer={setTimer}
-          answerCD={answerCD}
-          page={page}
-        />
+        {isTimed && (
+          <Timer
+            interval={interval}
+            revealAnswer={revealAnswer}
+            timer={timer}
+            setTimer={setTimer}
+            answerCD={answerCD}
+            page={page}
+          />
+        )}
       </div>
     </article>
   );

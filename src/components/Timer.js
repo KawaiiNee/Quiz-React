@@ -1,28 +1,13 @@
 import React, { useEffect } from "react";
 
 const Timer = ({ interval, revealAnswer, timer, setTimer, answerCD, page }) => {
-  // useEffect(() => {
-  //   if (revealAnswer) {
-  //     const timeout = setTimeout(() => {
-  //       if (revealAnswer) {
-  //         setTimeout(() => {
-  //           setTimer(interval);
-  //         }, answerCD / 2);
-  //       }
-  //     }, answerCD / 2);
-
-  //     return () => clearTimeout(timeout);
-  //   }
-  // }, [revealAnswer, answerCD, interval, setTimer]);
-
   useEffect(() => {
     setTimer(interval);
-  }, [page]);
+  }, [page, setTimer, interval]);
 
   useEffect(() => {
     const cooldown = setInterval(() => {
       if (!revealAnswer || timer >= 0) {
-        console.log(timer);
         setTimer(timer - 0.1);
       }
     }, 100);

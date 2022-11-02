@@ -126,6 +126,31 @@ export const Category = () => {
   );
 };
 
+export const Timed = () => {
+  const { isTimed, setIsTimed } = useGlobalContext();
+  return (
+    <div className="col-md-6 col-12">
+      <div className="p-3">
+        <div className=" form-switch text-center">
+          <input
+            className="form-check-input me-2"
+            type="checkbox"
+            role="switch"
+            id="flexSwitchCheckChecked"
+            checked={isTimed}
+            onChange={(e) => {
+              setIsTimed(e.target.checked);
+            }}
+          />
+          <label className="form-check-label" htmlFor="flexSwitchCheckChecked">
+            Checked switch checkbox input
+          </label>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export const Interval = () => {
   const { interval, setInterval } = useGlobalContext();
   return (

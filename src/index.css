@@ -12,6 +12,25 @@
   background-color: #112;
 }
 
+.enable .choice {
+  transform: scale(0);
+  animation: pop 0.275s forwards;
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.5);
+  }
+
+  75% {
+    transform: scale(1.1);
+  }
+
+  100% {
+    transform: scale(1);
+  }
+}
+
 .enable .choice:hover {
   background: orange !important;
   color: #112 !important;
