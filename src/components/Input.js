@@ -4,39 +4,56 @@ import { useGlobalContext } from "../context";
 
 export const Limit = () => {
   const { handleChange, params } = useGlobalContext();
+
   return (
-    <input
-      className="form-range"
-      type="range"
-      name="limit"
-      id="limit-range"
-      step={1}
-      min={1}
-      max={20}
-      value={params.limit}
-      onChange={handleChange}
-    />
+    <div className="col-md-6 col-12">
+      <div className="p-3">
+        <label htmlFor="limit-range" className="form-label">
+          Limit {params.limit}
+          <small className="text-muted ms-1">( no. of questions )</small>
+        </label>
+        <input
+          className="form-range"
+          type="range"
+          name="limit"
+          id="limit-range"
+          step={1}
+          min={1}
+          max={20}
+          value={params.limit}
+          onChange={handleChange}
+        />
+      </div>
+    </div>
   );
 };
 
 export const Region = () => {
   const { handleChange, params } = useGlobalContext();
+
   return (
-    <select
-      name="region"
-      className="form-select"
-      onChange={handleChange}
-      value={params.region}
-    >
-      <option value="">Select a region</option>
-      {Object.entries(regions).map(([countryCode, countryName]) => {
-        return (
-          <option key={countryCode} value={countryCode}>
-            {countryName}
-          </option>
-        );
-      })}
-    </select>
+    <div className="col-md-6 col-12">
+      <div className="p-3">
+        <label htmlFor="select-region" className="form-label">
+          Region
+        </label>
+        <select
+          name="region"
+          className="form-select"
+          onChange={handleChange}
+          value={params.region}
+        >
+          <option value="">Select a region</option>
+          {Object.entries(regions).map(([countryCode, countryName]) => {
+            return (
+              <option key={countryCode} value={countryCode}>
+                {countryName}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+    </div>
   );
 };
 
@@ -44,21 +61,30 @@ export const Difficulty = () => {
   const { handleChange, params } = useGlobalContext();
 
   return (
-    <select
-      name="difficulty"
-      className="form-select"
-      onChange={handleChange}
-      value={params.difficulty}
-    >
-      <option value="">Select a level</option>
-      {Object.entries(difficulty).map(([difficultyName, difficultyValue]) => {
-        return (
-          <option key={difficultyName} value={difficultyValue}>
-            {difficultyName}
-          </option>
-        );
-      })}
-    </select>
+    <div className="col-md-6 col-12">
+      <div className="p-3">
+        <label htmlFor="limit-range" className="form-label">
+          Difficulty
+        </label>
+        <select
+          name="difficulty"
+          className="form-select"
+          onChange={handleChange}
+          value={params.difficulty}
+        >
+          <option value="">Select a level</option>
+          {Object.entries(difficulty).map(
+            ([difficultyName, difficultyValue]) => {
+              return (
+                <option key={difficultyName} value={difficultyValue}>
+                  {difficultyName}
+                </option>
+              );
+            }
+          )}
+        </select>
+      </div>
+    </div>
   );
 };
 
@@ -70,25 +96,33 @@ export const Category = () => {
   };
 
   return (
-    <select
-      name="categories"
-      className="form-select"
-      onChange={handleChange}
-      value={params.categories}
-    >
-      <option value="">Select a category</option>
-      {categories.map((category) => {
-        return (
-          <option
-            key={category}
-            value={category}
-            style={{ textTransform: "capitalize" }}
-          >
-            {formatCateg(category)}
-          </option>
-        );
-      })}
-    </select>
+    <div className="col-md-6 col-12">
+      <div className="p-3">
+        <label htmlFor="limit-range" className="form-label">
+          Category
+          <small className="text-muted ms-1">( fields )</small>
+        </label>
+        <select
+          name="categories"
+          className="form-select"
+          onChange={handleChange}
+          value={params.categories}
+        >
+          <option value="">Select a category</option>
+          {categories.map((category) => {
+            return (
+              <option
+                key={category}
+                value={category}
+                style={{ textTransform: "capitalize" }}
+              >
+                {formatCateg(category)}
+              </option>
+            );
+          })}
+        </select>
+      </div>
+    </div>
   );
 };
 
@@ -109,7 +143,7 @@ export const Interval = () => {
           min={2.5}
           max={20}
           value={interval}
-          onChange={(e) => setInterval(e.target.value)}
+          onChange={(e) => setInterval(e.target.valueAsNumber)}
         />
       </div>
     </div>

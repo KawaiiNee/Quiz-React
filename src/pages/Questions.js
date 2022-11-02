@@ -5,6 +5,7 @@ import Question from "../components/Question";
 import Result from "./Result";
 import Choice from "../components/Choice";
 import { useGetQuestions } from "../fetchData";
+import Timer from "../components/Timer";
 const API_URL = "https://the-trivia-api.com/api/questions";
 
 const Questions = () => {
@@ -17,6 +18,9 @@ const Questions = () => {
   const [revealAnswer, setRevealAnswer] = useState(false);
   const [answer, setAnswer] = useState("");
   const [selected, setSelected] = useState(false);
+  const [timer, setTimer] = useState(interval);
+  // ms
+  const answerCD = 2000;
 
   // generates choices | place correctAns to random pos
   useEffect(() => {
@@ -30,16 +34,13 @@ const Questions = () => {
       setChoices(newChoices);
       setIsDisabled(false);
     }
-  }, [questions, page]);
+  }, [questions, page, interval]);
 
   const evalAnswer = React.useCallback(() => {
     if (questions[page]) {
       const { correctAnswer } = questions[page];
       if (answer === correctAnswer) {
-        console.log("correct");
         setScore((score) => score + 1);
-      } else {
-        console.log("incorrect");
       }
     }
   }, [answer, page, questions, setScore]);
@@ -51,6 +52,7 @@ const Questions = () => {
   };
 
   // TODO: an option weather timed or not
+  // TODO: make the question adjust
   // setup delays | before revealAnswer | preview correctAnswer | setPage
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -60,13 +62,13 @@ const Questions = () => {
       setTimeout(() => {
         setPage(page + 1);
         setSelected(false);
-      }, 2000);
-    }, interval * 1000);
+      }, answerCD);
+    }, timer * 1000);
 
     return () => {
       clearTimeout(timeout);
     };
-  }, [page, evalAnswer, interval]);
+  }, [page, evalAnswer, interval, timer]);
 
   if (loading) {
     return <Spinner />;
@@ -78,7 +80,7 @@ const Questions = () => {
 
   return (
     <article className="container text-center px-5">
-      <div className="row d-flex justify-content-center align-items-center">
+      <div className="row g-0 d-flex justify-content-center align-items-center">
         <Question question={questions[page].question} />
         <div className={`row gx-5 ${isDisabled ? "disabled" : "enable"}`}>
           {choices.map((choice, index) => {
@@ -100,6 +102,14 @@ const Questions = () => {
             );
           })}
         </div>
+        <Timer
+          interval={interval}
+          revealAnswer={revealAnswer}
+          timer={timer}
+          setTimer={setTimer}
+          answerCD={answerCD}
+          page={page}
+        />
       </div>
     </article>
   );
