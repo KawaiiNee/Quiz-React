@@ -143,7 +143,7 @@ export const Timed = () => {
             }}
           />
           <label className="form-check-label" htmlFor="flexSwitchCheckChecked">
-            Checked switch checkbox input
+            Timed
           </label>
         </div>
       </div>
