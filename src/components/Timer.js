@@ -41,9 +41,9 @@ const Timer = ({
     <div className="progress mt-5 ">
       <div
         className={`progress-bar ${
-          progress <= 100 && progress >= 65
+          progress <= 100 && progress >= 50
             ? "bg-primary"
-            : progress <= 64 && progress >= 25
+            : progress < 50 && progress >= 25
             ? "bg-warning"
             : "bg-danger"
         }`}
