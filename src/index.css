@@ -1,3 +1,8 @@
+html,
+body {
+  height: 100% !important;
+}
+
 .choice {
   transition: all 0.15s ease-in-out;
   letter-spacing: 0.075rem;
