@@ -61,24 +61,17 @@ const Questions = () => {
     }
   };
 
-  // TODO: an option weather timed or not
-  // TODO: make the question adjust
   // setup delays | before revealAnswer | preview correctAnswer | setPage
   useEffect(() => {
-    if (isTimed) {
-      const timeout = setTimeout(() => {
-        setRevealAnswer(true);
-        evalAnswer();
-        setIsDisabled(true);
-        setTimeout(() => {
-          setPage(page + 1);
-          setSelected(false);
-        }, answerCD);
-      }, timer * 1000);
-
-      return () => {
-        clearTimeout(timeout);
-      };
+    if (isTimed && Number(timer.toFixed(2)) === 0) {
+      setRevealAnswer(true);
+      evalAnswer();
+      setIsDisabled(true);
+      setTimeout(() => {
+        setPage(page + 1);
+        setSelected(false);
+        setTimer(interval);
+      }, answerCD);
     }
   }, [page, evalAnswer, interval, timer, isTimed]);
 
@@ -122,6 +115,7 @@ const Questions = () => {
             setTimer={setTimer}
             answerCD={answerCD}
             page={page}
+            lastQ={questions.length - 1 === page}
           />
         )}
       </div>
